@@ -32,14 +32,15 @@ Bye
 =====================================
 Statement Coverage: 75.00% (6 / 8)
 Branch Coverage: 50.00% (2 / 4)
-Condition Coverage: 50.00% (3 / 6)
+Condition Coverage: 50.00% (2 / 6)
 =====================================
+$
 ```
 
 The profiler should also support the verbose mode (specified by option `-v`), in which actual predicates and subexpression, as well as their evaluations, should be printed.
 
 ```bash
-$ python3 pcov.py -v -t examples/example2py 5 5
+$ python3 pcov.py -v -t examples/example2.py 5 5
 =====================================
 Program Output
 =====================================
@@ -47,7 +48,7 @@ Bye
 =====================================
 Statement Coverage: 75.00% (6 / 8)
 Branch Coverage: 50.00% (2 / 4)
-Condition Coverage: 50.00% (3 / 6)
+Condition Coverage: 33.33% (2 / 6)
 =====================================
 Covered Branches
 Line 6: (x == 10 and y == 5) ==> False
@@ -55,11 +56,18 @@ Line 8: (y == 1) ==> False
 =====================================
 Covered Conditions
 Line 6: x == 10 ==> False
-Line 6: y == 5 ==> True
 Line 8: (y == 1) ==> False
 =====================================
 $
 ```
+
+### Scopes
+
+Here are clarificatins about the scope of the coverage.
+- `IfExp` (e.g., `a = 10 if b > 3 else 5`) and list comprehension (e.g., `[str(x) for x in l if x > 0]`) create branches.
+- Statements are executed by taking a branch. Consequently, statement coverage can be computed by counting what is in the corresponding `body` in `ast.For`, `ast.While`, etc. However, there are other ways of covering statements.
+- We will assume that `Try` statements create one branch per `except` handler. For example, the `Try` in `examples/example5.py` creates two branches: one for `IOError` and another for `ArithmeticError`. Note that the body of `Try` itself does not create a branch as it is always executed.
+- You need to preserve both short-circuit behaviour and side-effects. For example, consider the verbose example for `python3 pcov.py -v -t examples/example2.py 5 5` above: `y == 5` is not evaluated, therefore no condition coverage is recorded. 
 
 ### Skeleton and Test Code
 
