@@ -4,7 +4,7 @@ def test_example5_statement():
     output = run_pcov("examples/example5.py", "1")
     cov, covered, total = get_coverage(STATEMENT_COV, output)
     assert covered == 9
-    assert total == 13
+    assert total == 12
 
 def test_example5_branch():
     output = run_pcov("examples/example5.py", "1")
