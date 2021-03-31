@@ -22,7 +22,7 @@ def test_example5_except_statement():
     output = run_pcov("examples/example5.py", "0")
     cov, covered, total = get_coverage(STATEMENT_COV, output)
     assert covered == 8
-    assert total == 13
+    assert total == 12
 
 def test_example5_except_branch():
     output = run_pcov("examples/example5.py", "0")
