@@ -15,5 +15,5 @@ def test_example6_branch():
 def test_example6_condition():
     output = run_pcov("examples/example6.py")
     cov, covered, total = get_coverage(CONDITION_COV, output)
-    assert covered == 2
-    assert total == 12
+    assert covered == 1
+    assert total == 6
