@@ -85,5 +85,5 @@ The template repository is configured with Python 3.9. The `ast` module in versi
 
 ### Submission Deadline
 
-You need to submit this assignment before **18:00 on 14th of April, 2021.**
+You need to submit this assignment before **18:00 on 12th of April, 2023.**
 
