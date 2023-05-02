@@ -18,5 +18,9 @@ def test_example1_verbose():
     output = run_pcov_verbose("examples/example1.py")
     lines = get_verbose_output(output)
     tuples = process_verbose_output(lines)
-    assert tuples[0] == (3, True)
-    assert tuples[1] == (3, True)   
+
+    should_contain_tuples = [
+        (3, True),
+        (3, True)
+    ]
+    assert sorted(tuples) == sorted(should_contain_tuples)

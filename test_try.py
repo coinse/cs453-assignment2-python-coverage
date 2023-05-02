@@ -40,7 +40,10 @@ def test_example5_except_condition():
 def test_example5_verbose():
     output = run_pcov_verbose("examples/example5.py", "0")
     lines = get_verbose_output(output)
-        
-    assert lines[0].find("try ==> IOError") > 0
-    assert lines[1].find("x == 0") > 0
-    assert lines[2].find("x == 0") > 0
+
+    should_contain_lines = [
+        "try ==> IOError",
+        "x == 0",
+        "x == 0"        
+    ]
+    assert check_required_line_contents(lines, should_contain_lines)

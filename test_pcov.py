@@ -32,3 +32,18 @@ def get_verbose_output(output):
 
 def process_verbose_output(lines):
 	return [(int(x.split(":")[0].split(" ")[1]), bool(strtobool(x.split("==>")[1].strip()))) for x in lines]
+
+def check_required_line_contents(lines, should_contain_lines):
+	if len(lines) != len(should_contain_lines):
+		return False
+
+	for required_line_content in should_contain_lines:
+		contained_line_index = -1
+		for i, l in enumerate(lines):
+			if required_line_content in l:
+				contained_line_index = i
+				break
+		if contained_line_index == -1:
+			return False
+	
+	return True

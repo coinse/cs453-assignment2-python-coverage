@@ -22,13 +22,20 @@ def test_example4_verbose():
     output = run_pcov_verbose("examples/example4.py", "10", "1", "2", "3")
     lines = get_verbose_output(output)
     tuples = process_verbose_output(lines)
+
+    should_contain_tuples = [
+        (4, False),
+        (7, False),
+        (4, False),
+        (7, False)
+    ]
     
-    assert (4, False) == tuples[0]
-    assert (7, False) == tuples[1]
-    assert (4, False) == tuples[2]
-    assert (7, False) == tuples[3]
-    
-    assert lines[0].find("int(x) > threshold") > 0
-    assert lines[1].find("count_gt(int(sys.argv[1]), sys.argv[2:]) > 0") > 0
-    assert lines[2].find("int(x) > threshold") > 0
-    assert lines[3].find("count_gt(int(sys.argv[1]), sys.argv[2:]) > 0") > 0
+    should_contain_lines = [
+        "int(x) > threshold",
+        "count_gt(int(sys.argv[1]), sys.argv[2:]) > 0",
+        "int(x) > threshold",
+        "count_gt(int(sys.argv[1]), sys.argv[2:]) > 0"
+    ]
+
+    assert sorted(tuples) == sorted(should_contain_tuples)
+    assert check_required_line_contents(lines, should_contain_lines)

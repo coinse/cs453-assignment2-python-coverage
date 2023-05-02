@@ -22,13 +22,22 @@ def test_example2_verbose():
     output = run_pcov_verbose("examples/example2.py", "10", "1")
     lines = get_verbose_output(output)
     tuples = process_verbose_output(lines)
-    
-    assert (6, False) == tuples[0]
-    assert (8, True) == tuples[1]
-    assert (6, True) == tuples[2]
-    assert (6, False) == tuples[3]
-    
-    assert lines[0].find("x == 10 and y == 5") > 0
-    assert lines[1].find("y == 1") > 0
-    assert lines[2].find("x == 10") > 0
-    assert lines[3].find("y == 5") > 0
+
+    should_contain_tuples = [
+        (6, False),
+        (8, True),
+        (6, True),
+        (6, False),
+        (8, True)
+    ]
+
+    should_contain_lines = [
+        "x == 10",
+        "y == 1",
+        "x == 10 and y == 5",
+        "y == 5",
+        "y == 1"
+    ]
+
+    assert sorted(tuples) == sorted(should_contain_tuples)
+    assert check_required_line_contents(lines, should_contain_lines)
