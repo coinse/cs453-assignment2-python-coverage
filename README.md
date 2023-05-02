@@ -81,7 +81,7 @@ The repository also includes public test cases: please refer to them for mode de
 
 ### Libraries and Python Version
 
-The template repository is configured with Python 3.9. The `ast` module in version 3.9 supports `unparse`: if you use this, you do not need the dependnece on `astor`. So, ideally, no external library is needed.
+The template repository is configured with Python 3.10. The `ast` module in version 3.10 supports `unparse`: if you use this, you do not need the dependence on `astor`. So, ideally, no external library is needed.
 
 ### Submission Deadline
 
