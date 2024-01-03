@@ -1,5 +1,6 @@
 import subprocess
 import re
+import json
 from distutils.util import strtobool
 
 STATEMENT_COV = "Statement"
@@ -18,32 +19,23 @@ def run_pcov_verbose(target, *args):
 	ret = subprocess.run(cmd, capture_output=True, text=True)
 	return ret.stdout
 
-def get_coverage(cov_type, output):
-	_line = list(filter(lambda x: x.startswith(cov_type), output.split("\n")))[0]
-	match = cov_re.search(_line)
-	if match:
-		return float(match.group(1)), int(match.group(2)), int(match.group(3))
-	else:
-		return 0, 0, 0
+def run_covpy(target, *args):
+	cmd = ["python3", "-m", "coverage", "erase"]
+	subprocess.run(cmd, capture_output=True, text=True)
 
-def get_verbose_output(output):
-	_lines = list(filter(lambda x: x.startswith("Line"), output.split("\n")))
-	return _lines
+	cmd = ["python3", "-m", "coverage", "run", "--branch", target] + list(args)
+	ret = subprocess.run(cmd, capture_output=True, text=True)
 
-def process_verbose_output(lines):
-	return [(int(x.split(":")[0].split(" ")[1]), bool(strtobool(x.split("==>")[1].strip()))) for x in lines]
-
-def check_required_line_contents(lines, should_contain_lines):
-	if len(lines) != len(should_contain_lines):
-		return False
-
-	for required_line_content in should_contain_lines:
-		contained_line_index = -1
-		for i, l in enumerate(lines):
-			if required_line_content in l:
-				contained_line_index = i
-				break
-		if contained_line_index == -1:
-			return False
+	cmd = ["python3", "-m", "coverage", "json"]
+	ret = subprocess.run(cmd, capture_output=True, text=True)
 	
-	return True
+	cov = json.load(open("coverage.json", "r"))
+	stmt_covered = cov["files"][target]["summary"]["covered_lines"]
+	stmt_total = cov["files"][target]["summary"]["num_statements"]
+	stmt_missing = cov["files"][target]["missing_lines"]
+
+	branch_covered = cov["files"][target]["summary"]["covered_branches"]
+	branch_total = cov["files"][target]["summary"]["num_branches"]
+	branch_missing = ["{}->{}".format(x[0], x[1]) for x in cov["files"][target]["missing_branches"]]
+
+	return stmt_covered, stmt_total, stmt_missing, branch_covered, branch_total, branch_missing
