@@ -1,6 +1,6 @@
 ## CS453 Assignment 2: Coverage Profiler for Python
 
-With this assignment, we will try implementing a basic coverage profiler for Python that can measure statement, branch, and condition coverage. Write a program that accepts another Python script file, as well as its arguments (if any required), and prints out the coverage achieved. The skeleton code, called `pcov.py`, contains a specific format. Consider the following target code, `example2.py`, which you can find under the directry `examples`:
+With this assignment, we will try implementing a basic coverage profiler for Python that can measure statement and branch in a similar way to the widely used [coverage.py](https://coverage.readthedocs.io/en/7.4.0/). Write a program that accepts another Python script file, as well as its arguments (if any required), and prints out the coverage achieved. The skeleton code, called `pcov.py`, contains a specific format. Consider the following target code, `example2.py`, which you can find under the directry `examples`:
 
 ```python
 import sys 
@@ -49,10 +49,13 @@ The output format is already specidied in the skeleton code. You need to provide
 
 ### Scopes
 
-Here are clarificatins about the scope of the coverage.
-- Statements are executed by taking a branch. Consequently, statement coverage can be computed by counting what is in the corresponding `body` in `ast.For`, `ast.While`, etc. However, there are other ways of covering statements.
-- We will assume that `Try` statements create one branch per `except` handler. For example, the `Try` in `examples/example5.py` creates two branches: one for `IOError` and another for `ArithmeticError`. Note that the body of `Try` itself does not create a branch as it is always executed.
-- You need to preserve both short-circuit behaviour and side-effects. For example, consider the verbose example for `python3 pcov.py -v -t examples/example2.py 5 5` above: `y == 5` is not evaluated, therefore no condition coverage is recorded. 
+Here are clarifications about the scope of the coverage.
+
+- 
+
+- We will consider the behaviour of `coverage.py` as the reference. You can check the reference behaviour by running `coverage.py` and looking at the json report. Please see the documentation for the details.
+
+- Note that `coverage.json` uses the line number -1 to denote the end of the program.
 
 ### Skeleton and Test Code
 
@@ -62,13 +65,10 @@ This repository includes a skeleton code named `pcov.py` for your profiler. Plea
 $ python pcov.py -t [your target python script file] [any command-line arguments]
 ```
 
-The repository also includes public test cases: please refer to them for mode detail. For example, while we test for the verbose mode output, parentheses do not really matter (i.e., `(y == 1)` and `y == 1` are the same as a representation of a condition).
+The repository also includes public test cases: please refer to them for more detail.
 
 ### Libraries and Python Version
 
-The template repository is configured with Python 3.10. The `ast` module in version 3.10 supports `unparse`: if you use this, you do not need the dependence on `astor`. So, ideally, no external library is needed.
-
-### Submission Deadline
-
-You need to submit this assignment before **18:00 on 12th of April, 2023.**
+- The template repository is configured with Python 3.10. 
+- We will use coverage.py version 7.2.3 as the gold standard.
 

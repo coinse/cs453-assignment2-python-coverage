@@ -1,10 +1,28 @@
 import sys
 
-def count_gt(threshold, nums):
-    gt = [int(x) for x in nums if int(x) > threshold]
-    return len(gt)
+class Pet:
+    def __init__(self, animal_type):
+        self.animal_type = animal_type
+        self.supported = {"dog", "cat", "duck", "pig"}
 
-x = count_gt(int(sys.argv[1]), sys.argv[2:])
-print(x)
-s = "Great!" if x > 0 else "Nah.."
-print(s)
+    def is_supported(self):
+        return self.animal_type in self.supported
+
+    def make_sound(self):
+        if self.animal_type == "dog":
+            return "Woof!"
+        elif self.animal_type == "cat":
+            return "Meaw!"
+        elif self.animal_type == "duck":
+            return "Quack!"
+        elif self.animal_type == "pig":
+            return "Oink!"
+
+animals = sys.argv[1:]
+
+for animal in animals:
+    pet = Pet(animal)
+    if not pet.is_supported():
+        break
+    else:
+        print(pet.make_sound())
