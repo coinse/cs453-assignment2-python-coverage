@@ -51,18 +51,27 @@ The output format is already specidied in the skeleton code. You need to provide
 
 Here are clarifications about the scope of the coverage.
 
-- 
-
 - We will consider the behaviour of `coverage.py` as the reference. You can check the reference behaviour by running `coverage.py` and looking at the json report. Please see the documentation for the details.
 
-- Note that `coverage.json` uses the line number -1 to denote the end of the program.
+- Note that `coverage.json` uses the line number -1 to denote the end of the program. It should be printed as "end" when the profiler is run in the verbose mode.
 
 ### Skeleton and Test Code
 
 This repository includes a skeleton code named `pcov.py` for your profiler. Please keep the existing code and the command line interface provided, so that GitHub Classroom can run the automated grading scripts. The usage is:
 
 ```bash
-$ python pcov.py -t [your target python script file] [any command-line arguments]
+$ usage: pcov.py [-h] [-v] -t TARGET [remaining ...]
+
+Measures coverage.
+
+positional arguments:
+  remaining
+
+options:
+  -h, --help            show this help message and exit
+  -v, --verbose
+  -t TARGET, --target TARGET
+$
 ```
 
 The repository also includes public test cases: please refer to them for more detail.
