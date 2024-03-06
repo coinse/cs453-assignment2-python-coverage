@@ -25,4 +25,4 @@ def test_example1_branch_verbose():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 1
     assert branch_total == 2
-    assert set(branch_missing) == {"3->1"}
+    assert set(branch_missing) == {"3->-1"}
