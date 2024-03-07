@@ -103,6 +103,6 @@ def test_example4_branch_verbose_4():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 4
     assert branch_total == 12
-    assert branch_missing == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->end'}
+    assert branch_missing == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->-1'}
 
 
