@@ -53,7 +53,7 @@ Here are clarifications about the scope of the coverage.
 
 - We will consider the behaviour of `coverage.py` as the reference. You can check the reference behaviour by running `coverage.py` and looking at the json report. Please see the documentation for the details.
 
-- Note that `coverage.json` uses the line number -1 to denote the end of the program. It should be printed as "end" when the profiler is run in the verbose mode.
+- Note that `coverage.json` uses the line number -1 to denote the end of the program.
 
 ### Skeleton and Test Code
 
