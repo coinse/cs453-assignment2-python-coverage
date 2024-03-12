@@ -43,7 +43,7 @@ def run_covpy(target, *args):
 	return stmt_covered, stmt_total, stmt_missing, branch_covered, branch_total, branch_missing
 
 def get_coverage(output):
-	lines = output.split("\n")
+	lines = output.strip().split("\n")
 	stmt_covered = 0
 	stmt_total = 0
 	stmt_missing = []
