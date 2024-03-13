@@ -11,7 +11,7 @@ def test_example2_statement_verbose():
     stmt_covered, stmt_total, stmt_missing, _, _, _ = get_coverage(output)
     assert stmt_covered == 6
     assert stmt_total == 8
-    assert {7, 11} == set(stmt_missing)
+    assert {"7", "11"} == set(stmt_missing)
 
 def test_example2_branch():
     output = run_pcov("examples/example2.py", "10", "1")
