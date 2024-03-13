@@ -24,7 +24,7 @@ def test_example5_branch_verbose_1():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 3
     assert branch_total == 6
-    assert branch_missing == {'6->7', '8->11', '12->13'}
+    assert set(branch_missing) == {'6->7', '8->11', '12->13'}
 
 def test_example5_statement_2():
     output = run_pcov("examples/example5.py", "0")
@@ -50,6 +50,6 @@ def test_example5_branch_verbose_2():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 2
     assert branch_total == 6
-    assert branch_missing == {'6->8', '8->9', '8->11', '12->14'}
+    assert set(branch_missing) == {'6->8', '8->9', '8->11', '12->14'}
 
 

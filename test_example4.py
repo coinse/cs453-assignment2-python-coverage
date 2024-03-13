@@ -24,7 +24,7 @@ def test_example4_branch_verbose_1():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 1
     assert branch_total == 12
-    assert branch_missing == {'12->13', '12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->24', '25->26', '25->28'}
+    assert set(branch_missing) == {'12->13', '12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->24', '25->26', '25->28'}
 
 def test_example4_statement_2():
     output = run_pcov("examples/example4.py", "dog")
@@ -50,7 +50,7 @@ def test_example4_branch_verbose_2():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 4
     assert branch_total == 12
-    assert branch_missing == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '25->26'}
+    assert set(branch_missing) == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '25->26'}
 
 
 def test_example4_statement_3():
@@ -77,7 +77,7 @@ def test_example4_branch_verbose_3():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 6
     assert branch_total == 12
-    assert branch_missing == {'14->16', '16->17', '16->18', '18->-11', '18->19', '25->26'}
+    assert set(branch_missing) == {'14->16', '16->17', '16->18', '18->-11', '18->19', '25->26'}
 
 def test_example4_statement_4():
     output = run_pcov("examples/example4.py", "dog", "wolf", "cat")
@@ -103,6 +103,6 @@ def test_example4_branch_verbose_4():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 4
     assert branch_total == 12
-    assert branch_missing == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->-1'}
+    assert set(branch_missing) == {'12->14', '14->15', '14->16', '16->17', '16->18', '18->-11', '18->19', '23->-1'}
 
 

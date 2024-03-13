@@ -37,7 +37,7 @@ def test_example3_branch_1_verbose():
     _, _, _, branch_covered, branch_total, branch_missing = get_coverage(output)
     assert branch_covered == 3
     assert branch_total == 4
-    assert branch_missing == {"4->3"}
+    assert set(branch_missing) == {"4->3"}
 
 def test_example3_branch_2():
     output = run_pcov("examples/example3.py", "0")
