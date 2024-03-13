@@ -10,7 +10,7 @@ def print_result(verbose:bool, stmt_covered:int, stmt_total:int, stmt_missing:li
 	branch_coverage = 0 if branch_total == 0 else branch_covered / branch_total * 100
 
 	print("=====================================")
-	print("Statements Coverage: {0:.2f} ({1}/{2})".format(stmt_coverage, stmt_covered, stmt_total))
+	print("Statement Coverage: {0:.2f} ({1}/{2})".format(stmt_coverage, stmt_covered, stmt_total))
 	if verbose:
 		print("Missing Statements: {}".format(", ".join([str(line_num) for line_num in stmt_missing])))
 	print("=====================================")
