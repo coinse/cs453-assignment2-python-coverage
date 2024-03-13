@@ -63,9 +63,13 @@ def get_coverage(output):
 			branch_covered = int(nums.split("/")[0].strip())
 			branch_total = int(nums.split("/")[1].strip())
 		elif line.startswith("Missing Statements: "):
-			stmt_missing += line.split(": ")[1].split(", ")
+			linenos = line.split(": ")[1]
+			if linenos:
+				stmt_missing += linenos.split(", ")
 		elif line.startswith("Missing Branches: "):
-			branch_missing += line.split(": ")[1].split(", ")
+			linenos = line.split(": ")[1]
+			if linenos:
+				branch_missing += linenos.split(", ")
 	return stmt_covered, stmt_total, stmt_missing, branch_covered, branch_total, branch_missing
 
 if __name__ == '__main__':
