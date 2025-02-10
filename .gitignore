@@ -1,6 +1,7 @@
 .coverage
 .DS_Store
 coverage.json
+pcov.json
 __pycache__/
 *.pyc
 .pytest_cache/
