@@ -62,7 +62,6 @@ it should generate the following (the missing statements and branches should be 
         "8->9"
     ]
 }
-$
 ```
 
 The output format is already specified in the skeleton code. You need to provide covered and total statements/branches, as well as two lists that contain string representations for missing statements/branches.
