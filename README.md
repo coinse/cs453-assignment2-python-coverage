@@ -36,10 +36,15 @@ it should generate the following (note that `5 5` at the end is consumed as comm
 }
 ```
 
-The profiler should also support the verbose mode (specified by option `-m`), in which the missing statements and branches should be recorded. A branch from line number `a` to `b` can be represented `a->b`.
+The profiler should also support the verbose mode (specified by option `-m`):
+
+```bash
+$ python3 pcov.py -v -t examples/example2.py 5 5
+```
+
+it should generate the following (the missing statements and branches should be recorded). A branch from line number `a` to `b` can be represented `a->b`.
 
 ```json
-$ python3 pcov.py -v -t examples/example2.py 5 5
 {
     "target_file": "examples/example2.py",
     "covered_lines": 6,
