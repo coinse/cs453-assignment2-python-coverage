@@ -91,7 +91,6 @@ options:
   -h, --help            show this help message and exit
   -v, --verbose
   -t TARGET, --target TARGET
-$
 ```
 
 The repository also includes public test cases: please refer to them for more detail.
