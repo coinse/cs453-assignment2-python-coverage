@@ -1,6 +1,6 @@
 ## CS453 Assignment 2: Coverage Profiler for Python
 
-With this assignment, we will try implementing a basic coverage profiler for Python that can measure statement and branch in a similar way to the widely used [coverage.py](https://coverage.readthedocs.io/en/7.4.0/). Write a program that accepts another Python script file, as well as its arguments (if any required), and prints out the coverage achieved. The skeleton code, called `pcov.py`, contains a specific format. Consider the following target code, `example2.py`, which you can find under the directry `examples`:
+With this assignment, we will try implementing a basic coverage profiler for Python that can measure statement and branch in a similar way to the widely used [coverage.py](https://coverage.readthedocs.io/en/7.4.0/). Write a program that accepts another Python script file, as well as its arguments (if any required), and generates a JSON file `pcov.json` containing coverage information. The skeleton code, called `pcov.py`, contains a specific format. Consider the following target code, `example2.py`, which you can find under the directry `examples`:
 
 ```python
 import sys 
@@ -22,30 +22,45 @@ When you invoke `pcov.py` as follows:
 $ python3 pcov.py -t examples/example2.py 5 5
 ```
 
-it should print out the following (note that `5 5` at the end is consumed as command line arguments for the target script, `example2.py`).
+it should generate the following (note that `5 5` at the end is consumed as command line arguments for the target script, `example2.py`).
 
-```bash
-=====================================
-Statement Coverage: 75.00% (6 / 8)
-Branch Coverage: 50.00% (2 / 4)
-=====================================
-$
+```json
+{
+    "target_file": "examples/example2.py",
+    "covered_lines": 6,
+    "num_statements": 8,
+    "statement_coverage": "75.00",
+    "covered_branches": 2,
+    "num_branches": 4,
+    "branch_coverage": "50.00"
+}
 ```
 
-The profiler should also support the verbose mode (specified by option `-m`), in which the missing statements and branches should be printed. A branch from line number `a` to `b` can be represented `a->b`.
+The profiler should also support the verbose mode (specified by option `-m`), in which the missing statements and branches should be recorded. A branch from line number `a` to `b` can be represented `a->b`.
 
-```bash
+```json
 $ python3 pcov.py -v -t examples/example2.py 5 5
-=====================================
-Statement Coverage: 75.00% (6 / 8)
-Missing Statements: 7, 9
-Branch Coverage: 50.00% (2 / 4)
-Missing Branches: 6->7, 8->9
-=====================================
+{
+    "target_file": "examples/example2.py",
+    "covered_lines": 6,
+    "num_statements": 8,
+    "statement_coverage": "75.00",
+    "missing_lines": [
+        "7",
+        "9"
+    ],
+    "covered_branches": 2,
+    "num_branches": 4,
+    "branch_coverage": "50.00",
+    "missing_branches": [
+        "6->7",
+        "8->9"
+    ]
+}
 $
 ```
 
-The output format is already specidied in the skeleton code. You need to provide covered and total statements/branches, as well as two lists that contain string representations for missing statements/branches.
+The output format is already specified in the skeleton code. You need to provide covered and total statements/branches, as well as two lists that contain string representations for missing statements/branches.
 
 ### Scopes
 
