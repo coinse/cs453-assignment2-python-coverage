@@ -36,7 +36,7 @@ it should generate the following (note that `5 5` at the end is consumed as comm
 }
 ```
 
-The profiler should also support the verbose mode (specified by option `-m`):
+The profiler should also support the verbose mode (specified by option `-v`):
 
 ```bash
 $ python3 pcov.py -v -t examples/example2.py 5 5
