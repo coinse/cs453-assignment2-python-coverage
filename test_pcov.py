@@ -13,12 +13,12 @@ cov_re = re.compile(r'(\d+\.\d+)% \((\d+) / (\d+)\)')
 def run_pcov(target, *args):
 	cmd = ["python3", "pcov.py", "-t", target] + list(args)
 	ret = subprocess.run(cmd, capture_output=True, text=True)
-	return ret.stdout
+	return
 
 def run_pcov_verbose(target, *args):
 	cmd = ["python3", "pcov.py", "-v", "-t", target] + list(args)
 	ret = subprocess.run(cmd, capture_output=True, text=True)
-	return ret.stdout
+	return
 
 def run_covpy(target, *args):
 	cmd = ["python3", "-m", "coverage", "erase"]
@@ -42,34 +42,21 @@ def run_covpy(target, *args):
 
 	return stmt_covered, stmt_total, stmt_missing, branch_covered, branch_total, branch_missing
 
-def get_coverage(output):
-	lines = output.strip().split("\n")
-	stmt_covered = 0
-	stmt_total = 0
+def get_coverage():
 	stmt_missing = []
-	branch_covered = 0
-	branch_total = 0
 	branch_missing = []
-	
-	for line in lines:
-		if line[0] == "=":
-			pass
-		elif line.startswith("Statement Coverage:"):
-			nums = line.split("(")[1][:-1]
-			stmt_covered = int(nums.split("/")[0].strip())
-			stmt_total = int(nums.split("/")[1].strip())
-		elif line.startswith("Branch Coverage:"):
-			nums = line.split("(")[1][:-1]
-			branch_covered = int(nums.split("/")[0].strip())
-			branch_total = int(nums.split("/")[1].strip())
-		elif line.startswith("Missing Statements: "):
-			linenos = line.split(": ")[1]
-			if linenos:
-				stmt_missing += linenos.split(", ")
-		elif line.startswith("Missing Branches: "):
-			linenos = line.split(": ")[1]
-			if linenos:
-				branch_missing += linenos.split(", ")
+
+	cov = json.load(open("pcov.json", "r"))
+	stmt_covered = cov["covered_lines"]
+	stmt_total = cov["num_statements"]
+	if "missing_lines" in cov:
+		stmt_missing = cov["missing_lines"]
+
+	branch_covered = cov["covered_branches"]
+	branch_total = cov["num_branches"]
+	if "missing_branches" in cov:
+		branch_missing = cov["missing_branches"]
+
 	return stmt_covered, stmt_total, stmt_missing, branch_covered, branch_total, branch_missing
 
 if __name__ == '__main__':
