@@ -98,13 +98,19 @@ The repository also includes public test cases: please refer to them for more de
 ### Libraries and Python Version
 
 - The template repository is configured with Python 3.10. 
-- We will use coverage.py version 7.2.3 as the gold standard.
+- We will use coverage.py version 7.13.4 as the gold standard.
 
 ### Report
 
 In addition to the implementation, submit a brief report as part of the repository. Name the file `report.pdf` in the root directory of the assignment repository. The report should contain the following:
 
 - A brief description of the problem in your own understanding
-- How you designed your solution
+- How you designed your solution (especially how the coverage is recorded).
 - Any unique idea/technique that you think you contributed to the implementation
 - A brief summary of what you've learnt
+
+### Important Notes
+
+- You can run the public test cases yourself using the files included in the repository: they are pytest test cases.
+- Ideally, instrumentation should happen in the background without any latency. So, **printing to the standard out**, or **constantly writing to a file**, is discouraged.
+- **DO NOT USE generative AI models**: they may be able to write coverage profiler for you, but then **what do you learn from the experience?** If you really feel stuck, ask questions on Slack instead.
